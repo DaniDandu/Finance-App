@@ -1,9 +1,5 @@
 def is_divisible(number, divisor):
-    a = number/ divisor
-    if type(a) == int:
-        return True
-    else:
-        return False
+    return number % divisor == 0
     # check that the variable `number` is divisible by `divisor`
     # return True or False
 print("1:")
@@ -11,11 +7,9 @@ print(is_divisible(6, 3))
 
 def get_number(x):
     if x % 2 != 0:
-        x = x * 3
-        return x
+        return x * 3
     else:
-        x = x / 2
-        return x
+        return x / 2
 # create a function which receives a number
 # if the number is odd (impar) multiply by 3, if not divide it by 2
 print("2:")
@@ -54,8 +48,7 @@ e = x > 10 and x < 10
 print(e)
 
 print("8:")
-x = 5
-# nu poate fi adevarat
+x = 0 #it could also be True
 f = not x
 print(f)
 
