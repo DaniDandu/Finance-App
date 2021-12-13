@@ -1,13 +1,17 @@
 #ex1
 def create_list(x, y, z, w, t):
+    lista = [x, y, z, w, t]
+    return lista
     # write code that creates a list with the input params of the function
-    pass # this line can be removed after the code is written
+
+a = create_list(1, 2, 0, 0, 0)
+print(a)
 
 #ex2
 def is_smaller_than_1_and_is_positive(a):
+
     #the function should return a bool
     # it should check the condition from the functions name
-    pass
 
 #ex3
 def compute_password_strength(password):
