@@ -3,11 +3,9 @@
 
 #ex1
 def sum():
-    print("x = ")
-    x = int(input())
-    print("y = ")
-    y = int(input())
-    print("Suma este: ", x + y)
+    x = int(input("Enter first number: "))
+    y = int(input("Enter second number"))
+    print("The sum is: ", x + y)
 # take 2 numbers from the user
 # print the sum back
 print("ex1")
@@ -53,31 +51,33 @@ print("ex3")
 #drink()
 
 #ex4
-def sentence():
-    print("Enter 5 words:")
-    word_1 = input()
-    word_2 = input()
-    word_3 = input()
-    word_4 = input()
-    word_5 = input()
-    text = word_1 + " " + word_2 + " " + word_3 + " " + word_4 + " " + word_5
-    print(text)
+# sentence = ""
+# for x in range(5):
+#     sentence = sentence + " " + input("Type a word:")
 #ask the user for at least 5 words
 #put them in a sentence
 print("ex4")
 #sentence()
 
 #ex5
+print("ex5")
 import random
 x = random.randint(0, 9) #this will pick a random number between 0 and 9
-def game(x):
-    print("enter a number between 0 and 9")
-    y = int(input())
-    print("the number was: ", x)
-    if x == y:
-        print("you guessed the number")
-    else:
-        print("you didn't guess the number")
+# def game(x):
+#     print("enter a number between 0 and 9")
+#     y = int(input())
+#     print("the number was: ", x)
+#     if x == y:
+#         print("you guessed the number")
+#     else:
+#         print("you didn't guess the number")
+tries = 0
+max_tries = 3
+user_nr = int(input("Guess a number between 0 and 9: "))
+while user_nr != x:
+    user_nr = int(input("You were wrong! Try again: "))
+print("You guessed it!")
+
 #create a guessing game, the user must tell a number between 0 and 9 and you must tell him if he guessed it
-print("ex5")
-game(x)
+
+
