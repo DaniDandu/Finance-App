@@ -9,3 +9,4 @@ args = sys.argv[1:] # when we take args from the command line, we remove the fir
 
 strings = [x for x in args if not x.isnumeric()]
 print(strings)
+
