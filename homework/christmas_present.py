@@ -42,6 +42,15 @@ print(str2)
 prices = {"iphone": 1000, "samsung": 800, "pixel": 600, "allview": 100, "nokia": 200, "oppo": 600}
 # ex7 - define a function which receives a dictionary (keys are the phone, values are the price)
 # and the budget (min & max) and return all the phones which are in the price interval
+def get_phones(phones: dict, min: int, max: int):
+    lista = []
+    for key, value in phones.items():
+        if min <= value <= max:
+            lista.append(key)
+    return lista
+
+print(get_phones(prices, 500, 900))
+
 
 accounts = [
     {"user": "Bob", "account": 0, "debt": 500},
@@ -52,7 +61,40 @@ accounts = [
 ]
 # ex8 - define a function which receives a list like the one above and returns the user with the biggest account and
 # the use with the biggest difference between debt and account
+max_account  = None
+max_diff = None
+for user in accounts:
+    if not max_account: # if max_account in None, we initialize it
+        max_account = user["user"]
+    if max_account and max_account > user["account"]:
+        max_account = user["user"]
+print(max_account)
+
 
 # ex9 - ask the user to give a name, email and telephone and write to a dict, print the dict
+user = input("what is your name?")
+email = input("what is your email?")
+tel = input("what is your phone number?")
+d = {"user": user, "email": email, "tel": tel}
+print(d)
+
 
 #ex10 - create a rock, paper, scissors game with the user's input
+# a take the user's input
+# pick a random choice of the computer
+# compare the choices and select the winner
+
+def rock_paper_scissors():
+    import random
+    computer = random.choice(["rock", "paper", "scissors"])
+    user = input("Pick rock, paper or scissors: ")
+    if computer == user:
+        print("Egalitate!")
+    elif (user == "rock" and computer == "scissors")\
+        or (user == "scissors" and computer == "paper")\
+        or (user == "paper" and computer == "rock"):
+        print("You won!" + computer)
+    else:
+        print("The computer won! you lost, loser!" + computer)
+
+rock_paper_scissors()
