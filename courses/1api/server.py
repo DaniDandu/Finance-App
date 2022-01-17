@@ -31,7 +31,7 @@ class Handler(BaseHTTPRequestHandler):
 
 # tell python what to execute
 if __name__ == "__main__":
-    # ip is like the building adress, the port is the apartment
+    # ip is like the building address, the port is the apartment
     hostname_and_port = ("127.0.0.1", 8080)
     web_server = HTTPServer(hostname_and_port, Handler)
     web_server.serve_forever()
