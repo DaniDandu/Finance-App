@@ -5,7 +5,7 @@ requests.post(url, json={"name": "Game of Thrones", "pages": 600, "author": "Ger
 requests.post(url, json={"name": "Amintiri din copilarie", "pages": 200, "author": "Ion Creanga"})
 requests.post(url, json={"name": "2052", "pages": 473, "author": "Jørgen Randers"})
 
-requests.delete(url, json={"name": "Amintiri din copilarie"})
+# requests.delete(url, json={"name": "Amintiri din copilarie"})
 
 
 

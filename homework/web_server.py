@@ -7,6 +7,7 @@
 
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import json  # dumps & loads
+from courses.oop_book import Book
 
 
 #define how to handle the request
@@ -17,11 +18,11 @@ class Handler(BaseHTTPRequestHandler):
         # first, read the input
         new_book = self.read_input()
         # validate the input
+        new_book_name = new_book["name"]
         if new_book["name"] in self.books.keys():
             self.send_response(409, message="The book already exists!")
         else:
-            self.books[new_book["name"]] = new_book
-            self.books[new_book["name"]]["pages_read"] = 0
+            self.books[new_book_name] = Book(new_book["name"], new_book["author"], new_book["pages"])
             self.send_response(200, message="We added the book to your library")
         self.add_headers()
 
@@ -35,8 +36,9 @@ class Handler(BaseHTTPRequestHandler):
     def do_PUT(self):
         a_book = self.read_input()
         name = a_book["name"]
+        pages = a_book["pages"]
         if name in self.books.keys():
-            self.books[name]["pages_read"] += a_book["pages"]
+            self.books[name].add_pages_read(pages)
             self.send_response(200, message="We added the read pages!")
         else:
             self.send_response(404, message="The book was not added to inventory!")
@@ -47,9 +49,19 @@ class Handler(BaseHTTPRequestHandler):
         self.send_response(200)
         # write the headers
         self.add_headers()
+        if self.path == "/progress":
+            info = self.get_books_progress()
+        else:
+            info = [b.__dict__ for b in self.books.values()]
         # write the body
-        d_json = json.dumps(self.books)
+        d_json = json.dumps(info)
         self.wfile.write(bytes(d_json, encoding="ISO-8859-1"))
+
+    def get_books_progress(self):
+        return [{
+            "name": b.name,
+            "percent_read": b.get_percent_read(),
+        }for b in self.books.values()]
 
     def read_input(self):
         length = self.headers['Content-Length']
@@ -57,6 +69,7 @@ class Handler(BaseHTTPRequestHandler):
         return json.loads(input)
 
     def add_headers(self):
+        print(self.books)
         self.send_response(200, message="We added the book to your library")
         self.end_headers()
 
