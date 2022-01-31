@@ -19,11 +19,11 @@ class PokerDeck:
     def get_cards(self, number_of_cards: int):
         cards = []
         for i in range(0, number_of_cards):
-            extracted_card = self.__extract_one_card(cards)
+            extracted_card = self.__extract_one_card()
             cards.append(extracted_card)
         return cards
 
-    def __extract_one_card(self, cards):
+    def __extract_one_card(self):
         # TODO optimize, remove duplicate code
         random_colour = random.choice(["trefla", "inima rosie", "romb", "inima neagra"])
         random_number = random.choice(self.cards[random_colour])
