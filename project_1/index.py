@@ -8,10 +8,10 @@
 # --reload -> the server will restart when we modify the code
 # --port <port_number> -> select on which port to start
 
-
 from fastapi import FastAPI
-from stock import Stock
+from stock_factory import StockFactory
 from stock_repo import StockRepository
+from models import StockModel
 
 app = FastAPI(
     title="Name of our app",  # TODO for homework, name your application
@@ -38,22 +38,20 @@ stock_repo = StockRepository()
 
 
 @app.post("/stocks")
-def add_new_stock(stock_info: dict):
-    new_stock = Stock(stock_info["ticker"], stock_info["company"], stock_info["field"])
+def add_new_stock(stock_info: StockModel):
+    new_stock = StockFactory().make(stock_info)
     stock_repo.add(new_stock)
 
 
-# TODO return your domain items
 # example if you want to do a tasks app return the list of tasks, and rename the url /items -> /tasks
-@app.get("/stocks")
+@app.get("/stocks", response_model=list[StockModel])
 def get_stocks():
-    stocks = stock_repo.get_all()
-    return [s.to_json() for s in stocks]
+    return stock_repo.get_all()
 
+#TODO create a get for a single stock, we give the ticker and receive more information
+# additional information: long summary, on which exchange it is, country, number of employees, industry
 
 # TODO add a put method to edit your domain item
-# TODO add a delete method to remove a domain item from the list
-# these methods should also save the data into a file for persistence across server reboots
 
 
 @app.delete("/stocks")

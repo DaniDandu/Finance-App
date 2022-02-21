@@ -13,3 +13,11 @@ class Stock:
             "field": self.field,
             "amount": self.amount,
         }
+
+    def to_json(self) -> dict:
+        return {
+            "ticker": self.ticker,
+            "company": self.company_name,
+            "field": self.field,
+            "amount": self.amount,
+        }
