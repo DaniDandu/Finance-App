@@ -6,18 +6,8 @@ class Stock:
         self.field = field
         self.amount = amount
 
-    def to_json(self) -> dict:
-        return {
-            "ticker": self.ticker,
-            "company": self.company_name,
-            "field": self.field,
-            "amount": self.amount,
-        }
+    def set_long_summary(self, summary: str):
+        self.long_summary = summary
 
-    def to_json(self) -> dict:
-        return {
-            "ticker": self.ticker,
-            "company": self.company_name,
-            "field": self.field,
-            "amount": self.amount,
-        }
+    def set_exchange(self, exchange: str):
+        self.exchange = exchange
