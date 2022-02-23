@@ -12,6 +12,7 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from stock_factory import StockFactory
 from stock_repo import StockRepository
+from config import Configuration
 from models import *
 from exceptions import StockNotFound
 
@@ -37,6 +38,7 @@ def health() -> dict:
 
 
 stock_repo = StockRepository()
+conf = Configuration()
 
 
 @app.post("/stocks")
@@ -52,10 +54,10 @@ def get_stocks(field: str = None, page: int = None):
     if field:
         stocks = [s for s in stocks if s.field == field]
     if page is not None and page >= 0:
-        number_of_items_per_page = 2
+        number_of_items_per_page = conf.get_number_of_items_per_page()
         # page = 0, 0:2
         # page = 1, 2:4
-        stocks = stocks[page * 2:(page + 1) * 2]
+        stocks = stocks[page * number_of_items_per_page:(page + 1) * number_of_items_per_page]
     return stocks
 
 #TODO create a get for a single stock, we give the ticker and receive more information
