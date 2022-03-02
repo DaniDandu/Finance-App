@@ -8,12 +8,14 @@
 # --reload -> the server will restart when we modify the code
 # --port <port_number> -> select on which port to start
 
+
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from stock_factory import StockFactory
 from stock_repo import StockRepository
 from config import Configuration
-from models import *
+from stock_file_persistance import StockFilePersistance
+from models import StockModel, StockExtendedModel
 from exceptions import StockNotFound
 
 app = FastAPI(
@@ -37,8 +39,10 @@ def health() -> dict:
     }
 
 
-stock_repo = StockRepository()
 conf = Configuration()
+if conf.get_db_type() == "file":
+    persistance = StockFilePersistance(conf.get_db_path())
+stock_repo = StockRepository(persistance)
 
 
 @app.post("/stocks")
@@ -49,22 +53,25 @@ def add_new_stock(stock_info: StockModel):
 
 # example if you want to do a tasks app return the list of tasks, and rename the url /items -> /tasks
 @app.get("/stocks", response_model=list[StockModel])
-def get_stocks(field: str = None, page: int = None):
+def get_stocks(field: str = None, min_employees: int = None, page: int = None, items_per_page: int = None):
     stocks = stock_repo.get_all()
     if field:
         stocks = [s for s in stocks if s.field == field]
+    if min_employees:
+        stocks = [s for s in stocks if s.number_of_employees >= min_employees]
     if page is not None and page >= 0:
-        number_of_items_per_page = conf.get_number_of_items_per_page()
+        # below, it's called a ternary operator
+        number_of_items_per_page = items_per_page if items_per_page else conf.get_number_of_items_per_page()
         # page = 0, 0:2
         # page = 1, 2:4
         stocks = stocks[page * number_of_items_per_page:(page + 1) * number_of_items_per_page]
     return stocks
 
-#TODO create a get for a single stock, we give the ticker and receive more information
+
+# TODO create a get for a single stock, we give the ticker and receive more information
 # additional information: long summary, on which exchange it is, country, number of employees, industry
 
-
-# we put an id in the URL to select only one resource
+# we can put an id in the URL to select only one resource
 @app.get("/stocks/{ticker_id}", response_model=StockExtendedModel)
 def get_one_stock(ticker_id: str):
     return stock_repo.get_by_ticker(ticker_id)
