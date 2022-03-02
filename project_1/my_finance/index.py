@@ -11,10 +11,11 @@
 
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
-from stock_factory import StockFactory
-from stock_repo import StockRepository
-from config import Configuration
-from stock_file_persistance import StockFilePersistance
+
+from stock.stock_factory import StockFactory
+from stock.stock_repo import StockRepository
+from configuration.config import Configuration
+from database.stock_file_persistance import StockFileStockPersistance
 from models import StockModel, StockExtendedModel
 from exceptions import StockNotFound
 
@@ -41,7 +42,7 @@ def health() -> dict:
 
 conf = Configuration()
 if conf.get_db_type() == "file":
-    persistance = StockFilePersistance(conf.get_db_path())
+    persistance = StockFileStockPersistance(conf.get_db_path())
 stock_repo = StockRepository(persistance)
 
 

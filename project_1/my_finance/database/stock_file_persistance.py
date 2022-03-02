@@ -1,9 +1,9 @@
 import json
 
-from persistance_interface import PersistanceInterface
+from stock.persistance_interface import StockPersistanceInterface
 
 
-class StockFilePersistance(PersistanceInterface):
+class StockFileStockPersistance(StockPersistanceInterface):
     def __init__(self, path: str):
         self.path = path
 
