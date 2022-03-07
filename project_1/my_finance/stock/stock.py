@@ -11,9 +11,13 @@ class Stock:
         self.exchange = ""
         self.country = country
         self.number_of_employees = number_of_employees
+        self.price = -1
 
     def set_long_summary(self, summary: str):
         self.long_summary = summary
 
     def set_exchange(self, exchange: str):
         self.exchange = exchange
+
+    def set_price(self, value):
+        self.price = value
