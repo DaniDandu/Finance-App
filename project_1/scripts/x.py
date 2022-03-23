@@ -1,19 +1,23 @@
 import yfinance
-
-# get the data in a dataframe object
-tsla = yfinance.Ticker("AAPL")
-dataframe = tsla.history("max")
-dataframe.reset_index()
-
-# draw the plot/figure/diagram
 from plotly import graph_objects
 
-scatter = graph_objects.Scatter(x=dataframe.index, y=dataframe["Close"])
-diagram = graph_objects.Figure([scatter])
-diagram.show()
+# get the data in a dataframe object
+ticker = yfinance.Ticker("AAPL")
+dataframe = ticker.history("3y")
 
-# dataframe2 = tsla.financials
-# dataframe2.reset_index()
-# scatter2 = graph_objects.Scatter(x=dataframe2.index, y=dataframe2["2021-12-31"])
-# diagram2 = graph_objects.Figure([scatter2])
-# diagram2.show()
+yesterday_high = dataframe["High"]["2022-03-23"]
+
+print(dataframe)
+print(yesterday_high)
+
+# diagram = graph_objects.Figure(
+#     graph_objects.Candlestick(
+#         x=dataframe.index,
+#         low=dataframe["Low"],
+#         high=dataframe["High"],
+#         open=dataframe["Open"],
+#         close=dataframe["Close"],
+#     )
+# )
+#
+# diagram.show()
