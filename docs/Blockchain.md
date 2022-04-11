@@ -1,4 +1,4 @@
-Resources to make a simple blockchain using Python:
+Resources to make a simple blockchain using  Python:
 
 Create a blockchain with 60 lines of code:
 https://medium.com/coinmonks/python-tutorial-build-a-blockchain-713c706f6531
