@@ -4,7 +4,7 @@ Pentru nota 7 (1p)
     3 update requirements.txt to have all the packages there
     4 write in README the steps to get the project ( git clone, create venv, install packages, start the server )
     5 add a description to the app, in index.py
-    6 format all files with black
+    6 format all files with black.
 
 Pentru nota 8 (1p)
     1 handle exceptions if the user tries to add a stock which already exists
