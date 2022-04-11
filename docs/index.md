@@ -4,13 +4,21 @@
 
 [[Functions]]
 
+[[Conditions]]
+
+[[Exceptions]]
+
 [[Version_control]]
 
 [[Databases]]
 
+[[Files]]
+
 [[API]]
 
 [[CLI]]
+
+[[GUI]]
 
 [[OOP_index]]
 
@@ -18,3 +26,4 @@
 
 [[Libraries]]
 
+[[Logging_and_Formatting]]
