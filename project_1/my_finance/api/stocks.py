@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from models import StockModel, StockExtendedModel
-from stock.stock_factory import StockFactory
+from my_finance.models import StockModel, StockExtendedModel
+from my_finance.stock.stock_factory import StockFactory
 from my_finance.stock.stock_repo import StockRepository
 
 stocks_router = APIRouter(prefix="/stocks")
