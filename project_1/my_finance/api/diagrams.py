@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from my_finance.models import DiagramModel
-from my_finance.stock.diagrams.figure import show_simple_diagram, create_and_save_to_file
+from models import DiagramModel
+from stock.diagrams.figure import show_simple_diagram, create_and_save_to_file
 
 diagrams_router = APIRouter(prefix="/diagrams")
 

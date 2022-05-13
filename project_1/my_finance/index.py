@@ -15,14 +15,14 @@ from fastapi_utils.tasks import repeat_every
 import yfinance
 import logging
 
-from my_finance.stock.stock_repo import StockRepository
-from my_finance.configuration.config import Configuration
-from my_finance.database.stock_file_persistance import StockFileStockPersistance
-from my_finance.database.stock_sql_persistance import StockSqlPersistance
-from my_finance.exceptions import StockNotFound
-from my_finance.api.stocks import stocks_router
-from my_finance.api.health import health_router
-from my_finance.api.diagrams import diagrams_router
+from stock.stock_repo import StockRepository
+from configuration.config import Configuration
+from database.stock_file_persistance import StockFileStockPersistance
+from database.stock_sql_persistance import StockSqlPersistance
+from exceptions import StockNotFound
+from api.stocks import stocks_router
+from api.health import health_router
+from api.diagrams import diagrams_router
 
 app = FastAPI(
     title="Name of our app",  # TODO for homework, name your application

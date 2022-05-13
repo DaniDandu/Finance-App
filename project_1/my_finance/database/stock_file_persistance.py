@@ -1,6 +1,6 @@
 import json
 
-from my_finance.stock.persistance_interface import StockPersistanceInterface
+from stock.persistance_interface import StockPersistanceInterface
 
 
 class StockFileStockPersistance(StockPersistanceInterface):
