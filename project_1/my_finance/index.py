@@ -20,6 +20,7 @@ from configuration.config import Configuration
 from database.stock_file_persistance import StockFileStockPersistance
 from database.stock_sql_persistance import StockSqlPersistance
 from exceptions import StockNotFound
+from exceptions import StockExists
 from api.stocks import stocks_router
 from api.health import health_router
 from api.diagrams import diagrams_router
@@ -74,3 +75,8 @@ def update_prices():
 @app.exception_handler(StockNotFound)
 def handle_stock_not_found(exception, request):
     return JSONResponse(content="The stock you requested was not saved in our app!", status_code=404)
+
+
+@app.exception_handler(StockExists)
+def handle_stock_exists(exception, request):
+    return JSONResponse(content="The stock you requested is already stored in the database. Try another one!", status_code=409)

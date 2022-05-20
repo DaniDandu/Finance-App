@@ -1,6 +1,7 @@
 from stock.stock import Stock
 from exceptions import StockNotFound
 from exceptions import CannotAddStock
+from exceptions import StockExists
 
 
 class StockRepository:
@@ -9,21 +10,24 @@ class StockRepository:
 
     @staticmethod
     def add(new_stock: Stock):
-        stock_info = {
-            "ticker": new_stock.ticker,
-            "company": new_stock.company,
-            "amount": new_stock.amount,
-            "field": new_stock.field,
-            "longSummary": new_stock.long_summary,
-            "exchange": new_stock.exchange,
-            "country": new_stock.country,
-            "numberOfEmployees": new_stock.number_of_employees,
-        }
-        try:
-            StockRepository.persistance.add(stock_info)
-        except Exception as e:
-            raise CannotAddStock("Could not add stock. Reason: " + str(e))
-        StockRepository.stocks[new_stock.ticker] = new_stock
+        if new_stock.ticker not in StockRepository.stocks.keys():
+            stock_info = {
+                "ticker": new_stock.ticker,
+                "company": new_stock.company,
+                "amount": new_stock.amount,
+                "field": new_stock.field,
+                "longSummary": new_stock.long_summary,
+                "exchange": new_stock.exchange,
+                "country": new_stock.country,
+                "numberOfEmployees": new_stock.number_of_employees,
+            }
+            try:
+                StockRepository.persistance.add(stock_info)
+            except Exception as e:
+                raise CannotAddStock("Could not add stock. Reason: " + str(e))
+            StockRepository.stocks[new_stock.ticker] = new_stock
+        else:
+            raise StockExists()
 
     @staticmethod
     def get_all() -> list[Stock]:
