@@ -29,7 +29,7 @@ app = FastAPI(
     # <major_version>.<minor_version>.<patch_version>
     version="1.0.0",
     description="Store your information about stocks in a database. "
-                "With StockIt you can add, find or delete an stock and also you can make a diagram with the price evolution",
+                "With StockIt you can add, find or delete an stock. In addition you can make a diagram with the price evolution.",
 )
 app.include_router(stocks_router)
 app.include_router(health_router)
@@ -45,10 +45,6 @@ stock_repo = StockRepository()
 
 logging.basicConfig(filename="finance.log", encoding="utf-8", level=logging.DEBUG)
 logging.info("Starting the finance app ...")
-
-
-# TODO create a get for a single stock, we give the ticker and receive more information
-# additional information: long summary, on which exchange it is, country, number of employees, industry
 
 
 @app.on_event("startup")
