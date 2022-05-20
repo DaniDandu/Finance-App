@@ -25,10 +25,11 @@ from api.health import health_router
 from api.diagrams import diagrams_router
 
 app = FastAPI(
-    title="Name of our app",  # TODO for homework, name your application
+    title="StockIt",
     # <major_version>.<minor_version>.<patch_version>
-    version="0.2.0",  # increase version after finishing homework
-    description="",  # TODO add a description
+    version="1.0.0",
+    description="Store your information about stocks in a database. "
+                "With StockIt you can add, find or delete an stock and also you can make a diagram with the price evolution",
 )
 app.include_router(stocks_router)
 app.include_router(health_router)
