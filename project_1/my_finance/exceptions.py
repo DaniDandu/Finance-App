@@ -8,3 +8,7 @@ class CannotAddStock(Exception):
 
 class StockExists(Exception):
     pass
+
+
+class StockDeleted(Exception):
+    pass

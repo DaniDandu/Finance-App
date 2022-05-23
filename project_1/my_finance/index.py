@@ -21,6 +21,7 @@ from database.stock_file_persistance import StockFileStockPersistance
 from database.stock_sql_persistance import StockSqlPersistance
 from exceptions import StockNotFound
 from exceptions import StockExists
+from exceptions import StockDeleted
 from api.stocks import stocks_router
 from api.health import health_router
 from api.diagrams import diagrams_router
@@ -80,3 +81,8 @@ def handle_stock_not_found(exception, request):
 @app.exception_handler(StockExists)
 def handle_stock_exists(exception, request):
     return JSONResponse(content="The stock you requested is already stored in the database. Try another one!", status_code=409)
+
+
+@app.exception_handler(StockDeleted)
+def handle_stock_deleted(exception, request):
+    return JSONResponse(content="This stock has already been deleted from the database or has not been stored.", status_code=404)

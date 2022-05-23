@@ -2,6 +2,7 @@ from stock.stock import Stock
 from exceptions import StockNotFound
 from exceptions import CannotAddStock
 from exceptions import StockExists
+from exceptions import StockDeleted
 
 
 class StockRepository:
@@ -44,8 +45,11 @@ class StockRepository:
 
     @staticmethod
     def remove(stock_id: str):
-        StockRepository.stocks.pop(stock_id)
-        StockRepository.persistance.remove(stock_id)
+        if stock_id in StockRepository.stocks.keys():
+            StockRepository.stocks.pop(stock_id)
+            StockRepository.persistance.remove(stock_id)
+        else:
+            raise StockDeleted()
 
     @staticmethod
     def load():
