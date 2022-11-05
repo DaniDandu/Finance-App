@@ -2,7 +2,7 @@
 
 Take a git clone by writing the text below in your terminal:
 
-    git clone https://github.com/DaniDandu/ItSchool_myFinance.git
+    git clone https://github.com/DaniDandu/Finance-App
     cd project_1
 
 # Create a Virtual Environment (venv):
